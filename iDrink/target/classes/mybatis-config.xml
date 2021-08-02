@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 别名定义 -->
+    <typeAliases>
+        <typeAlias alias="Product" type="com.iDrink.pojo.Product" />
+        <typeAlias alias="Customer" type="com.iDrink.pojo.Customer" />
+        <typeAlias alias="Supplier" type="com.iDrink.pojo.Supplier" />
+        <typeAlias alias="Administrator" type="com.iDrink.pojo.Administrator" />
+        <typeAlias alias="baseDict" type="com.iDrink.pojo.BaseDict"/>
+    </typeAliases>
+
+    <!-- 实体接口映射文件 -->
+    <mappers>
+        <mapper resource="mapper/adMapper.xml" />
+        <mapper resource="mapper/cusMapper.xml"/>
+        <mapper resource="mapper/proMapper.xml" />
+        <mapper resource="mapper/supMapper.xml"/>
+        <mapper resource="mapper/BaseDictDao.xml"/>
+    </mappers>
+</configuration>

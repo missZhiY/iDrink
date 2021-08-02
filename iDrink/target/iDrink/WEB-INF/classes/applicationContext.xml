@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!-- c3p0数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <property name="jdbcUrl"
+                  value="jdbc:mysql://localhost:3306/iDrink?useUnicode=true&amp;characterEncoding=utf-8"></property>
+        <property name="user" value="root" />
+        <property name="password" value="xhc2000525OK" />
+    </bean>
+
+    <!-- mybatis的SqlSession的工厂 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!-- mapper扫描器 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.iDrink.mapper"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+    <!-- 创建Administrator操作-->
+    <bean id = "adService" class="com.iDrink.service.impl.AdServiceImpl"></bean>
+    <!-- 创建Customer操作-->
+    <bean id = "cusService" class="com.iDrink.service.impl.CusServiceImpl"></bean>
+    <!-- 创建Product操作-->
+    <bean id = "proService" class="com.iDrink.service.impl.ProServiceImpl"></bean>
+    <!-- 创建Supplier操作-->
+    <bean id = "supService" class="com.iDrink.service.impl.SupServiceImpl"></bean>
+</beans>

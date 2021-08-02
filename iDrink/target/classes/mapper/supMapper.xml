@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iDrink.mapper.SupMapper">
+
+    <select id="supPage" resultType="com.iDrink.pojo.Supplier" parameterType="com.iDrink.pojo.Supplier">
+        select * from supplier
+        <where>
+            <if test="s_name != null" >
+                 s_name = #{s_name}
+            </if>
+            <if test="s_product != null" >
+                and s_product = #{s_product}
+            </if>
+            <if test="s_address != null" >
+                and s_address = #{s_address}
+            </if>
+        </where>
+        order by s_id asc limit #{start},#{size}
+    </select>
+
+    <select id="getSupById" parameterType="Integer" resultType="Supplier">
+        select * from supplier where s_id = #{s_id};
+    </select>
+
+    <select id="supCount" parameterType="Supplier" resultType="Integer">
+        select count(*) from supplier
+        <where>
+            <if test="s_name != null" >
+                and s_name = #{s_name}
+            </if>
+            <if test="s_product != null" >
+                and s_product = #{s_product}
+            </if>
+            <if test="s_address != null" >
+                and s_address = #{s_address}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateSup" parameterType="Supplier" >
+        update supplier
+        <set>
+            <if test="s_name != null">
+                s_name = #{s_name},
+            </if>
+            <if test="s_product != null">
+                s_product = #{s_product},
+            </if>
+            <if test="s_phone != null">
+                s_phone = #{s_phone},
+            </if>
+            <if test="s_address != null">
+                s_address = #{s_address},
+            </if>
+            <if test="s_price != null">
+                s_price = #{s_price}
+            </if>
+        </set>
+        where s_id = #{s_id}
+    </update>
+
+    <delete id="deleteSup" parameterType="Integer">
+        delete from supplier where s_id = #{s_id}
+    </delete>
+
+    <insert id="addSup" parameterType="Supplier">
+        insert into supplier(s_name, s_phone, s_address, s_product, s_price)
+        values (#{s_name}, #{s_phone}, #{s_address}, #{s_product}, #{s_price})
+    </insert>
+
+</mapper>

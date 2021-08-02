@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iDrink.mapper.CusMapper">
+
+    <select id="cusPage" parameterType="Customer" resultType="Customer">
+        select * from customer
+        <where>
+            <if test="c_name != null" >
+                c_name = #{c_name}
+            </if>
+            <if test="c_product != null" >
+                and c_product = #{c_product}
+            </if>
+            <if test="c_address != null" >
+                and c_address = #{c_address}
+            </if>
+        </where>
+        order by c_id asc limit #{start},#{size}
+    </select>
+
+    <select id="getCustomerById" parameterType="Integer" resultType="Customer">
+        select * from customer where c_id = #{c_id};
+    </select>
+
+    <select id="cusCount"  parameterType="Customer" resultType="Integer">
+        select count(*) from customer
+        <where>
+            <if test="c_name != null" >
+                c_name = #{c_name}
+            </if>
+            <if test="c_product != null" >
+                and c_product = #{c_product}
+            </if>
+            <if test="c_address != null" >
+                and c_address = #{c_address}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateCus" parameterType="Customer" >
+        update customer
+        <set>
+            <if test="c_name != null">
+                c_name = #{c_name},
+            </if>
+            <if test="c_priority != 0">
+                c_priority = #{c_priority},
+            </if>
+            <if test="c_phone != null">
+                c_phone = #{c_phone},
+            </if>
+            <if test="c_address != null">
+                c_address = #{c_address},
+            </if>
+            <if test="c_price != null">
+                c_price = #{c_price},
+            </if>
+            <if test="c_ordercount != null">
+                c_ordercount = #{c_ordercount},
+            </if>
+            <if test="c_product != null">
+                c_product = #{c_product},
+            </if>
+            <if test="c_totalpay!= null">
+                c_totalpay = #{c_totalpay}
+            </if>
+        </set>
+        where c_id = #{c_id}
+    </update>
+
+    <delete id="deleteCus" parameterType="Integer">
+        delete from customer where c_id = #{c_id}
+    </delete>
+
+    <insert id="addCus" parameterType="Customer">
+        insert into customer(c_name, c_priority, c_phone, c_address, c_product, c_price, c_ordercount, c_totalpay)
+        values (#{c_name}, #{c_priority}, #{c_phone}, #{c_address}, #{c_product}, #{c_price}, #{c_ordercount}, #{c_totalpay})
+    </insert>
+
+</mapper>

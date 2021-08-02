@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iDrink.mapper.ProMapper">
+
+    <select id="selectPro" resultType="Product">
+        select * from products
+    </select>
+
+    <select id="proPage" parameterType="Product" resultType="Product">
+        select * from products
+        <where>
+            <if test="p_name != null" >
+                p_name = #{p_name}
+            </if>
+            <if test="s_name != null" >
+                and s_name = #{s_name}
+            </if>
+            <if test="s_address != null">
+                and s_address = #{s_address}
+            </if>
+        </where>
+        order by p_id asc limit #{start},#{size}
+    </select>
+
+    <select id="getProById" parameterType="Integer" resultType="Product">
+        select * from products where p_id = #{p_id};
+    </select>
+
+    <select id="proCount" parameterType="Product" resultType="Integer">
+        select count(*) from products
+        <where>
+            <if test="p_name != null" >
+                p_name = #{p_name}
+            </if>
+            <if test="s_name != null" >
+                and s_name = #{s_name}
+            </if>
+        </where>
+    </select>
+
+    <update id="updatePro" parameterType="Product" >
+        update products
+        <set>
+            <if test="p_name != null">
+                p_name = #{p_name},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="s_name != null">
+                s_name = #{s_name}
+            </if>
+        </set>
+        where p_id = #{p_id}
+    </update>
+
+    <delete id="deletePro" parameterType="Integer">
+        delete from products where p_id = #{p_id}
+    </delete>
+
+    <insert id="addPro" parameterType="Product">
+        insert into products(p_id, p_name, price, s_name)
+        values (#{p_id}, #{p_name}, #{price}, #{s_name})
+    </insert>
+
+</mapper>
