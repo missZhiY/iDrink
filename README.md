@@ -3,7 +3,8 @@
 应付实训，基本的CRUD，没有完善和增加附加功能的想法
 # 目录
 ## iDrink/database
-数据库
+数据库  
+检查下里面的触发器在不在，缺失会导致数据字典没办法同步更新
 ## iDrink/pom.xml
 项目配置文件
 ## iDrink/src/main/java/com.iDrink
