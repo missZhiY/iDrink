@@ -58,11 +58,11 @@
         <property name="prefix" value="/WEB-INF/jsps/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
-<!--    &lt;!&ndash; 配置拦截器 &ndash;&gt;-->
-<!--    <mvc:interceptors>-->
-<!--        <mvc:interceptor>-->
-<!--            <mvc:mapping path="/**" />-->
-<!--            <bean class="com.iDrink.interceptor.LoginInterceptor" />-->
-<!--        </mvc:interceptor>-->
-<!--    </mvc:interceptors>-->
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+       <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.iDrink.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
